@@ -9,13 +9,23 @@ const Body = () => {
   const [searchRes, setSearchRes] = useState("");
 
   useEffect(() => {
-    debugger;
     fetchData();
   }, []);
 
   const fetchData = async () => {
     const rawData = resdata.data.feedItems;
-    const values = Object.values(rawData); // convert numbered keys to array
+    const response = await fetch(
+      "https://raw.githubusercontent.com/bhanuarya06/Kubera-Foods/main/resData.json"
+    );
+    console.log(response);
+    debugger;
+    if (response.ok) {
+      const data = await response.json();
+      console.log(data);
+    } else {
+      console.error("Failed to fetch:", response.status);
+    }
+    const values = Object.values(rawData);
     const resList = values.filter((res) => res.store);
     setlistOfRes(resList);
     setfilterListOfRes(resList);
