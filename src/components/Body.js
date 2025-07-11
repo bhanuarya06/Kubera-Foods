@@ -1,11 +1,10 @@
 import { useState, useEffect } from "react";
-import resdata from "../../restaurantData";
 import RestaurantCard from "./RestaurantCard";
 import Shimmer from "./Shimmer";
 
 const Body = () => {
-  const [listOfRes, setlistOfRes] = useState([]);
-  const [filterListOfRes, setfilterListOfRes] = useState([]);
+  const [listOfRes, setListOfRes] = useState([]);
+  const [filterListOfRes, setFilterListOfRes] = useState([]);
   const [searchRes, setSearchRes] = useState("");
 
   useEffect(() => {
@@ -13,22 +12,27 @@ const Body = () => {
   }, []);
 
   const fetchData = async () => {
-    const rawData = resdata.data.feedItems;
     const response = await fetch(
-      "https://raw.githubusercontent.com/bhanuarya06/Kubera-Foods/main/resData.json"
+      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=17.406498&lng=78.47724389999999&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
     );
-    console.log(response);
-    debugger;
-    if (response.ok) {
-      const data = await response.json();
-      console.log(data);
-    } else {
-      console.error("Failed to fetch:", response.status);
-    }
-    const values = Object.values(rawData);
-    const resList = values.filter((res) => res.store);
-    setlistOfRes(resList);
-    setfilterListOfRes(resList);
+    const data = await response.json();
+    const restaurantCard = data.data.cards.find(
+      (card) =>
+        card.card?.card?.gridElements?.infoWithStyle?.restaurants
+    );
+    const restaurants =
+      restaurantCard?.card?.card?.gridElements?.infoWithStyle?.restaurants || [];
+    setListOfRes(restaurants);
+    setFilterListOfRes(restaurants);
+  };
+
+  const handleSearch = (e) => {
+    const value = e.target.value;
+    setSearchRes(value);
+    const filtered = listOfRes.filter((res) =>
+      res.info?.name?.toLowerCase().includes(value.toLowerCase())
+    );
+    setFilterListOfRes(filtered);
   };
 
   return listOfRes.length === 0 ? (
@@ -40,23 +44,13 @@ const Body = () => {
           className="border mx-6 rounded-lg"
           value={searchRes}
           placeholder="   Search Restaurant"
-          onChange={(e) => {
-            setSearchRes(e.target.value);
-            const filteredRes = listOfRes.filter((res) =>
-              res.store?.title?.text
-                .toLowerCase()
-                .includes(e.target.value.toLowerCase())
-            );
-            setfilterListOfRes(filteredRes);
-          }}
+          onChange={handleSearch}
         />
       </div>
-      <div>
-        <div className="flex flex-wrap p-2 m-2">
-          {filterListOfRes.map((res) => (
-            <RestaurantCard resdata={res} key={res.uuid} />
-          ))}
-        </div>
+      <div className="flex flex-wrap p-2 m-2">
+        {filterListOfRes.map((res) => (
+          <RestaurantCard resdata={res} key={res.info.id} />
+        ))}
       </div>
     </div>
   );
