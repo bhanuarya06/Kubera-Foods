@@ -7,7 +7,7 @@ const CategoryList = ({ item }) => {
 
   return (
     <div className="m-auto p-2 w-6/12 shadow-lg border-slate-100 border-b-15">
-      <div className="flex justify-between" onClick={()=>setShowDishes(!showDishes)}>
+      <div className="m-2 flex justify-between" onClick={()=>setShowDishes(!showDishes)}>
         <span className="font-bold text-lg ">
           {title}({itemCards.length})
         </span>
