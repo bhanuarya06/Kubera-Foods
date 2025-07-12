@@ -1,31 +1,17 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import RestaurantCard from "./RestaurantCard";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
+import useFetchRestaurants from "../utils/useFetchRestaurants";
 
 const Body = () => {
-  const [listOfRes, setListOfRes] = useState([]);
-  const [filterListOfRes, setFilterListOfRes] = useState([]);
   const [searchRes, setSearchRes] = useState("");
+  const [filterListOfRes, setFilterListOfRes] = useState([]);
+  const { listOfRes } = useFetchRestaurants();
 
   useEffect(() => {
-    fetchData();
-  }, []);
-
-  const fetchData = async () => {
-    const response = await fetch(
-      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=17.406498&lng=78.47724389999999&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
-    );
-    const data = await response.json();
-    const restaurantCard = data.data.cards.find(
-      (card) =>
-        card.card?.card?.gridElements?.infoWithStyle?.restaurants
-    );
-    const restaurants =
-      restaurantCard?.card?.card?.gridElements?.infoWithStyle?.restaurants || [];
-    setListOfRes(restaurants);
-    setFilterListOfRes(restaurants);
-  };
+    setFilterListOfRes(listOfRes);
+  }, [listOfRes]);
 
   const handleSearch = (e) => {
     const value = e.target.value;
@@ -50,7 +36,9 @@ const Body = () => {
       </div>
       <div className="flex flex-wrap p-2 m-2">
         {filterListOfRes.map((res) => (
-          <Link to={'/restaurant/'+res.info.id} key={res.info.id}><RestaurantCard resdata={res}/></Link>
+          <Link to={"/restaurant/" + res.info.id} key={res.info.id}>
+            <RestaurantCard resdata={res} />
+          </Link>
         ))}
       </div>
     </div>
