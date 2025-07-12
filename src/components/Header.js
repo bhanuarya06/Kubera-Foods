@@ -3,13 +3,13 @@ import { Link } from "react-router-dom";
 
 const Header = () => {
   return (
-    <div className="flex justify-between">
-      <div className="flex w-30 pl-2">
+    <div className="flex h-20 mb-2 justify-between rounded-b-md bg-rose-400">
+      <div className="flex w-30 p-1 items-center">
         <Link to="/">
           <img
             src="https://mir-s3-cdn-cf.behance.net/projects/404/8538f0166998985.Y3JvcCwzMTcwLDI0ODAsMTY0LDA.gif"
             alt="logo"
-            className="h-20"
+            className="h-15 w-30 rounded-2xl"
           />
         </Link>
       </div>
