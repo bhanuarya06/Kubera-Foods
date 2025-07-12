@@ -1,13 +1,16 @@
 import { useState } from "react";
 import Dish from "./Dish";
 
-const CategoryList = ({ item }) => {
+const CategoryList = ({ item, showDishes, setShowIndex }) => {
   const { itemCards, title } = item?.card?.card;
-  const [showDishes, setShowDishes] = useState(false);
+
+  const setDishes = ()=>{
+    setShowIndex()
+  }
 
   return (
     <div className="m-auto p-2 w-6/12 shadow-lg border-slate-100 border-b-15">
-      <div className="m-2 hover:cursor-pointer flex justify-between" onClick={()=>setShowDishes(!showDishes)}>
+      <div className="m-2 hover:cursor-pointer flex justify-between" onClick={setDishes}>
         <span className="font-bold text-lg ">
           {title}({itemCards.length})
         </span>

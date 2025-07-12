@@ -1,12 +1,13 @@
 import { useParams } from "react-router";
-import Shimmer from "./Shimmer";
 import CategoryList from "./CategoryList";
 import useFetchResMenu from "../utils/useFetchResMenu";
 import MenuShimmer from "./MenuShimmer";
+import { useState } from "react";
 
 const ResMenu = () => {
   const { id } = useParams();
   const menuData = useFetchResMenu(id);
+  const [showIndex,setShowIndex] = useState(null)
 
   if (menuData === null) return <MenuShimmer />;
 
@@ -29,10 +30,12 @@ const ResMenu = () => {
       <div>
         <h1 className="font-bold text-lg">Menu</h1>
         <div>
-          {items.map((item) => (
+          {items.map((item,index) => (
             <CategoryList
               key={item?.card?.card?.title}
               item={item}
+              showDishes={index===showIndex ?true:false}
+              setShowIndex={()=> index===showIndex?setShowIndex(null): setShowIndex(index)}
             ></CategoryList>
           ))}
         </div>
