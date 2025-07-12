@@ -21,7 +21,7 @@ const ResMenu = () => {
 
   return (
     <div className="text-center">
-      <div className="m-2 p-2">
+      <div className=" mb-4 p-2 border-0 shadow-2xl rounded-lg bg-slate-100">
         <h1 className="font-bold text-xl">{text}</h1>
         <h3>⭐ {avgRating}</h3>
         <h3>{sla?.slaString}</h3>
