@@ -5,3 +5,5 @@ export const resMenuId = "https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_
 export const dishImageId = "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,h_600/"
 
 export const fetchRestaurants = "https://www.swiggy.com/dapi/restaurants/list/v5?lat=17.406498&lng=78.47724389999999&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
+
+export const logoUrl = "https://mir-s3-cdn-cf.behance.net/projects/404/8538f0166998985.Y3JvcCwzMTcwLDI0ODAsMTY0LDA.gif"

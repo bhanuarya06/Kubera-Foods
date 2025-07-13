@@ -1,10 +1,19 @@
 import React from "react";
 import { dishImageId } from "../utils/constants";
+import { useDispatch } from "react-redux";
+import { addCart } from "../utils/CartSlice";
 
 const Dish = ({ dish }) => {
   const { name, ratings, price, imageId, description, defaultPrice } =
     dish?.card?.info;
-  console.log(dish);
+
+    const dispatch = useDispatch()
+
+  const handleAddItem = (item)=>{
+    debugger;
+    dispatch(addCart(item));
+  }
+
   const imageurl = dishImageId + imageId;
   return (
     <div className="p-2 border-slate-200 border-b-1 flex flex-wrap items-center justify-between ">
@@ -19,7 +28,7 @@ const Dish = ({ dish }) => {
         <div className="text-xs">{description}</div>
       </div>
       <div className="p-2 w-3/12">
-        <button className="absolute ml-15 w-15 text-center hover:cursor-pointer hover:bg-amber-300 bg-white text-green-600 rounded-lg">
+        <button className="absolute ml-15 w-15 text-center hover:cursor-pointer hover:bg-amber-300 bg-white text-green-600 rounded-lg" onClick={()=>handleAddItem(dish)}>
           ADD
         </button>
         <img src={imageurl}></img>
