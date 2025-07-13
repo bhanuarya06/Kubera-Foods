@@ -7,7 +7,7 @@ const Dish = ({ dish }) => {
   console.log(dish);
   const imageurl = dishImageId + imageId;
   return (
-    <div className="p-2 border-slate-200 border-b-1 flex flex-wrap items-center justify-between">
+    <div className="p-2 border-slate-200 border-b-1 flex flex-wrap items-center justify-between ">
       <div className="p-2 w-9/12">
         <div className=" ">
           <div className="text-lg">{name}</div>

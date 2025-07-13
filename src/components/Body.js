@@ -1,8 +1,9 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import RestaurantCard from "./RestaurantCard";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 import useFetchRestaurants from "../utils/useFetchRestaurants";
+import UserContext from "../utils/UserContext";
 
 const Body = () => {
   const [searchRes, setSearchRes] = useState("");
@@ -34,6 +35,7 @@ const Body = () => {
           onChange={handleSearch}
         />
       </div>
+
       <div className="flex flex-wrap justify-center p-2 m-2">
         {filterListOfRes.map((res) => (
           <Link to={"/restaurant/" + res.info.id} key={res.info.id}>

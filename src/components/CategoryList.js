@@ -9,7 +9,7 @@ const CategoryList = ({ item, showDishes, setShowIndex }) => {
   }
 
   return (
-    <div className="m-auto p-2 w-6/12 shadow-lg border-slate-100 border-b-15">
+    <div className="m-auto p-2 w-6/12 shadow-lg border-slate-100 border-b-15 bg-slate-50">
       <div className="m-2 hover:cursor-pointer flex justify-between" onClick={setDishes}>
         <span className="font-bold text-lg ">
           {title}({itemCards.length})
