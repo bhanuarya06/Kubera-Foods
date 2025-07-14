@@ -27,11 +27,11 @@ const Dish = ({ dish }) => {
         </div>
         <div className="text-xs">{description}</div>
       </div>
-      <div className="p-2 w-3/12">
+      <div className="p-2 w-3/12 ">
         <button className="absolute ml-15 w-15 text-center hover:cursor-pointer hover:bg-amber-300 bg-white text-green-600 rounded-lg" onClick={()=>handleAddItem(dish)}>
           ADD
         </button>
-        <img src={imageurl}></img>
+        <img className="h-25 w-90 rounded-lg" src={imageurl}></img>
       </div>
     </div>
   );
